@@ -1,42 +1,46 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ScreenSwiper : MonoBehaviour
 {
     
-    private Vector3 origin;
-    private Vector3 diff;
-    private Vector3 cameraReset;
-    private bool drag = false;
+    private Vector3 _origin;
+    private Vector3 _diff;
+    private Vector3 _cameraReset;
+    private bool _drag = false;
+    private Camera _mainCamera;
+
+    private void Awake()
+    {
+        _mainCamera = Camera.main;
+    }
 
     void Start()
     {
-        cameraReset = Camera.main.transform.position;
+        _cameraReset = _mainCamera.transform.position;
     }
 
     private void LateUpdate()
     {
         if (Input.GetMouseButton(0))
         {
-            diff = (Camera.main.ScreenToWorldPoint(Input.mousePosition)) - Camera.main.transform.position;
-            if (!drag)
+            _diff = (_mainCamera.ScreenToWorldPoint(Input.mousePosition)) - _mainCamera.transform.position;
+            if (!_drag)
             {
-                drag = true;
-                origin = (Camera.main.ScreenToWorldPoint(Input.mousePosition));
+                _drag = true;
+                _origin = (_mainCamera.ScreenToWorldPoint(Input.mousePosition));
             }
         }
         else
         {
-            drag = false;
+            _drag = false;
         }
-        if (drag)
+        if (_drag)
         {
-            Camera.main.transform.position = origin - diff;
+            _mainCamera.transform.position = _origin - _diff;
         }
         if (Input.GetMouseButton(1))
         {
-            Camera.main.transform.position = cameraReset;
+            _mainCamera.transform.position = _cameraReset;
         }
     }   
 }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -139,7 +139,7 @@ GameObject:
   - component: {fileID: 41948428}
   - component: {fileID: 41948423}
   m_Layer: 5
-  m_Name: Mountains_Button
+  m_Name: MountainsButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -209,9 +209,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 41948428}
-        m_TargetAssemblyTypeName: Switch_Scene, Assembly-CSharp
+        m_TargetAssemblyTypeName: SwitchScene, Assembly-CSharp
         m_MethodName: ChangeScene
-        m_Mode: 3
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -245,7 +245,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   atlas: {fileID: 4343727234628468602, guid: 87e389f40643386458e506c0a3c25722, type: 2}
-  original_image: Mountains_Button
+  originalImage: Mountains_Button
 --- !u!114 &41948426
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -296,6 +296,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07202dea5ed00f2449b61ebf50c4ff15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  switchSceneId: 0
 --- !u!1 &51481602
 GameObject:
   m_ObjectHideFlags: 0
@@ -381,9 +382,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 51481607}
-        m_TargetAssemblyTypeName: Switch_Scene, Assembly-CSharp
+        m_TargetAssemblyTypeName: SwitchScene, Assembly-CSharp
         m_MethodName: ChangeScene
-        m_Mode: 3
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -442,6 +443,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07202dea5ed00f2449b61ebf50c4ff15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  switchSceneId: 0
 --- !u!1 &203292807
 GameObject:
   m_ObjectHideFlags: 0
@@ -506,7 +508,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &308627177
 GameObject:
@@ -524,7 +526,7 @@ GameObject:
   - component: {fileID: 308627184}
   - component: {fileID: 308627179}
   m_Layer: 5
-  m_Name: Meadow_Button
+  m_Name: MeadowButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -594,9 +596,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 308627184}
-        m_TargetAssemblyTypeName: Switch_Scene, Assembly-CSharp
+        m_TargetAssemblyTypeName: SwitchScene, Assembly-CSharp
         m_MethodName: ChangeScene
-        m_Mode: 3
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -630,7 +632,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   atlas: {fileID: 4343727234628468602, guid: 87e389f40643386458e506c0a3c25722, type: 2}
-  original_image: Meadow_Button
+  originalImage: Meadow_Button
 --- !u!114 &308627182
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -681,6 +683,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07202dea5ed00f2449b61ebf50c4ff15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  switchSceneId: 0
 --- !u!1 &556917986
 GameObject:
   m_ObjectHideFlags: 0
@@ -697,7 +700,7 @@ GameObject:
   - component: {fileID: 556917993}
   - component: {fileID: 556917988}
   m_Layer: 5
-  m_Name: Forest_Button
+  m_Name: ForestButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -767,9 +770,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 556917993}
-        m_TargetAssemblyTypeName: Switch_Scene, Assembly-CSharp
+        m_TargetAssemblyTypeName: SwitchScene, Assembly-CSharp
         m_MethodName: ChangeScene
-        m_Mode: 3
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -829,7 +832,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   atlas: {fileID: 4343727234628468602, guid: 87e389f40643386458e506c0a3c25722, type: 2}
-  original_image: Forest_Button
+  originalImage: Forest_Button
 --- !u!114 &556917992
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -854,6 +857,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07202dea5ed00f2449b61ebf50c4ff15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  switchSceneId: 0
 --- !u!1 &697891304
 GameObject:
   m_ObjectHideFlags: 0
@@ -1032,7 +1036,7 @@ RectTransform:
   - {fileID: 308627178}
   - {fileID: 51481603}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1055,7 +1059,7 @@ GameObject:
   - component: {fileID: 1441123731}
   - component: {fileID: 1441123726}
   m_Layer: 5
-  m_Name: Hell_Button
+  m_Name: HellButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1125,9 +1129,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1441123731}
-        m_TargetAssemblyTypeName: Switch_Scene, Assembly-CSharp
+        m_TargetAssemblyTypeName: SwitchScene, Assembly-CSharp
         m_MethodName: ChangeScene
-        m_Mode: 3
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1161,7 +1165,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   atlas: {fileID: 4343727234628468602, guid: 87e389f40643386458e506c0a3c25722, type: 2}
-  original_image: Hell_Button
+  originalImage: Hell_Button
 --- !u!114 &1441123729
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1212,99 +1216,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07202dea5ed00f2449b61ebf50c4ff15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1680699980
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1680699982}
-  - component: {fileID: 1680699981}
-  m_Layer: 0
-  m_Name: Directional Light
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!108 &1680699981
-Light:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1680699980}
-  m_Enabled: 1
-  serializedVersion: 10
-  m_Type: 1
-  m_Shape: 0
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 1
-  m_Range: 10
-  m_SpotAngle: 30
-  m_InnerSpotAngle: 21.80208
-  m_CookieSize: 10
-  m_Shadows:
-    m_Type: 2
-    m_Resolution: -1
-    m_CustomResolution: -1
-    m_Strength: 1
-    m_Bias: 0.05
-    m_NormalBias: 0.4
-    m_NearPlane: 0.2
-    m_CullingMatrixOverride:
-      e00: 1
-      e01: 0
-      e02: 0
-      e03: 0
-      e10: 0
-      e11: 1
-      e12: 0
-      e13: 0
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    m_UseCullingMatrixOverride: 0
-  m_Cookie: {fileID: 0}
-  m_DrawHalo: 0
-  m_Flare: {fileID: 0}
-  m_RenderMode: 0
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RenderingLayerMask: 1
-  m_Lightmapping: 4
-  m_LightShadowCasterMode: 0
-  m_AreaSize: {x: 1, y: 1}
-  m_BounceIntensity: 1
-  m_ColorTemperature: 6570
-  m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
-  m_UseBoundingSphereOverride: 0
-  m_UseViewFrustumForShadowCasterCull: 1
-  m_ShadowRadius: 0
-  m_ShadowAngle: 0
---- !u!4 &1680699982
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1680699980}
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+  switchSceneId: 0
 --- !u!1 &1820158380
 GameObject:
   m_ObjectHideFlags: 0
@@ -1321,7 +1233,7 @@ GameObject:
   - component: {fileID: 1820158387}
   - component: {fileID: 1820158382}
   m_Layer: 5
-  m_Name: Steppe_Button
+  m_Name: SteppeButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1391,9 +1303,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1820158387}
-        m_TargetAssemblyTypeName: Switch_Scene, Assembly-CSharp
+        m_TargetAssemblyTypeName: SwitchScene, Assembly-CSharp
         m_MethodName: ChangeScene
-        m_Mode: 3
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1427,7 +1339,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   atlas: {fileID: 4343727234628468602, guid: 87e389f40643386458e506c0a3c25722, type: 2}
-  original_image: Steppe_Button
+  originalImage: Steppe_Button
 --- !u!114 &1820158385
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1478,6 +1390,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07202dea5ed00f2449b61ebf50c4ff15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  switchSceneId: 0
 --- !u!1 &1843629867
 GameObject:
   m_ObjectHideFlags: 0
@@ -1513,8 +1426,8 @@ Camera:
   m_GameObject: {fileID: 1843629867}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -1530,7 +1443,7 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
+  orthographic: 1
   orthographic size: 5
   m_Depth: -1
   m_CullingMask:
