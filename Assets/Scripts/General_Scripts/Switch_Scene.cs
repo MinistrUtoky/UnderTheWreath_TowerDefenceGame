@@ -5,9 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class Switch_Scene : MonoBehaviour
 {
-    void Start()
-    {
-    }
     
     public void ChangeScene(int sceneID)
     {
