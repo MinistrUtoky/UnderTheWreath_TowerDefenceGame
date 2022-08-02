@@ -82,9 +82,12 @@ public class ShootingController : MonoBehaviour
                 _archer.StopAiming();
             }
         }
-        _dragEndPoint = _mainCamera.ScreenToWorldPoint(touchPosition);
-        _archer.Shoot();
-        _dragEndPoint = Vector2.zero;
-        _dragStartPoint = Vector2.zero;
+        else 
+        {
+            _dragEndPoint = _mainCamera.ScreenToWorldPoint(touchPosition);
+            _archer.Shoot();
+            _dragEndPoint = Vector2.zero;
+            _dragStartPoint = Vector2.zero;
+        }
     }
 }
