@@ -14,11 +14,17 @@ public class Basic_Enemy_Script : MonoBehaviour
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
-        _backLeapVector = new Vector3(_damageBackLeap, 0, 0);
+        _backLeapVector = new Vector3(-_damageBackLeap, _damageBackLeap, 0);
     }
 
     void Update()
     {
+        EnemyMovement();
+    }
+
+    private void EnemyMovement() {
+        if (_rb.velocity == Vector2.zero) return;
+        if (_rb.velocity.x < 0) return;
         _rb.velocity = new Vector3(_speed, 0, 0);
     }
 
@@ -32,8 +38,11 @@ public class Basic_Enemy_Script : MonoBehaviour
     {
         if (col.gameObject.name == "Wall")
         {
-            _rb.velocity = Vector3.zero;
-            _rb.AddForce(_backLeapVector, ForceMode2D.Impulse);
+            _rb.AddForce(_backLeapVector);
+        }
+        if (col.gameObject.name == "Ground")
+        {
+            _rb.velocity = new Vector3(_speed, 0, 0);
         }
     }
 

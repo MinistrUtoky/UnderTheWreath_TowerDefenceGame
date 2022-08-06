@@ -51,7 +51,6 @@ public class Arrow : MonoBehaviour
         }
         if (col.gameObject.tag == "Enemy")
         {
-            Debug.Log("Gay");
             col.gameObject.GetComponent<Basic_Enemy_Script>().TakeDamage(_damage);
             Destroy(gameObject);
         }
