@@ -4,17 +4,14 @@ using UnityEngine;
 
 public class Basic_Enemy_Script : MonoBehaviour
 {
-    [SerializeField] private float _speed = 3.0f;
-    [SerializeField] private int _hp = 10;
-    [SerializeField] private int _damage = 5;
-    [SerializeField] private float _damageBackLeap = 10f;
-    private Vector3 _backLeapVector;
-    private Rigidbody2D _rb;
+    [SerializeField] protected float speed = 3.0f;
+    [SerializeField] protected int hp = 10;
+    [SerializeField] protected int damage = 5;
+    protected Rigidbody2D rb;
 
     void Start()
     {
-        _rb = GetComponent<Rigidbody2D>();
-        _backLeapVector = new Vector3(-_damageBackLeap, _damageBackLeap, 0);
+        rb = GetComponent<Rigidbody2D>();  
     }
 
     void Update()
@@ -23,27 +20,30 @@ public class Basic_Enemy_Script : MonoBehaviour
     }
 
     private void EnemyMovement() {
-        if (_rb.velocity == Vector2.zero) return;
-        if (_rb.velocity.x < 0) return;
-        _rb.velocity = new Vector3(_speed, 0, 0);
+        if (rb.velocity == Vector2.zero) return;
+        if (rb.velocity.x < 0) return;
+        rb.velocity = new Vector3(speed, 0, 0);
     }
 
     public void TakeDamage(int damage)
     {
-        _hp -= damage;
-        if (_hp <= 0) Destroy(gameObject);
+        hp -= damage;
+        if (hp <= 0) Destroy(gameObject);
     }
 
-    void OnCollisionEnter2D(Collision2D col)
+    protected IEnumerator HittingBuiling(GameObject obj)
     {
-        if (col.gameObject.name == "Wall")
+        for (; obj.activeSelf; )
         {
-            _rb.AddForce(_backLeapVector);
-        }
-        if (col.gameObject.name == "Ground")
-        {
-            _rb.velocity = new Vector3(_speed, 0, 0);
+            DamageDealing(obj);
+            yield return new WaitForSeconds(2);
         }
     }
 
+    protected void DamageDealing(GameObject obj)
+    {
+        if (obj.name == "Barracks") obj.GetComponent<Barracks_Script>().TakeDamage(damage);
+        else if (obj.name == "Townhall") obj.GetComponent<Townhall_Script>().TakeDamage(damage);
+        else if (obj.name == "Wall") obj.GetComponent<Wall_Script>().TakeDamage(damage);
+    }
 }
