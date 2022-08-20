@@ -9,26 +9,25 @@ public class Spawn_Enemies : MonoBehaviour
     private class Enemy {
         public GameObject objectToPool;
         public int amountToPool;
-    }
-    [SerializeField] private int _numberOfWaves = 1;
+    }   
     [SerializeField] private List<Enemy> _enemyPoolers = new List<Enemy>();
-    private List<ObjectPooler> pools = new List<ObjectPooler>();
-    private ObjectPooler pool;
+    private List<ObjectPooler> _pools = new List<ObjectPooler>();
+    private ObjectPooler _pool;
 
-    void Start()
+    public void CreateEnemies()
     {
+        MakeRandomWave(1, 2);
         foreach (Enemy enemy in _enemyPoolers)
         {
-            pool = new ObjectPooler();
-            pool.poolFilling(enemy.objectToPool, enemy.amountToPool);
-            pools.Add(pool);
+            _pool = new ObjectPooler();
+            _pool.poolFilling(enemy.objectToPool, enemy.amountToPool);
+            _pools.Add(_pool);
         }
-        SpawnAll();
     }
 
-    private void SpawnAll()
+    public void SpawnAll()
     {
-        foreach (var pool in pools) {
+        foreach (ObjectPooler pool in _pools) {
             while (true)
             {
                 GameObject enemyPrefab = pool.GetPooledObject();
@@ -40,6 +39,14 @@ public class Spawn_Enemies : MonoBehaviour
                 }
                 else break;
             }
+        }
+    }
+
+    private void MakeRandomWave(int from, int to)
+    {
+        foreach (Enemy enemy in _enemyPoolers)
+        {
+            enemy.amountToPool = Random.Range(from, to);
         }
     }
 }

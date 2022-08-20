@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ObjectPooler : MonoBehaviour
 {
-    private List<GameObject> pooledObjects; 
+    [SerializeField] private List<GameObject> _pooledObjects = new List<GameObject>(); 
     public GameObject objectToPool;
     public int amountToPool;
 
@@ -17,13 +17,13 @@ public class ObjectPooler : MonoBehaviour
     {
         if (objectToPool == null) objectToPool = obj;
         if (amountToPool == 0) amountToPool = amount;
-        pooledObjects = new List<GameObject>();
+        _pooledObjects = new List<GameObject>();
         GameObject tmp;
         for (int i = 0; i < amount; i++)
         {
             tmp = Instantiate(obj);
             tmp.SetActive(false);
-            pooledObjects.Add(tmp);
+            _pooledObjects.Add(tmp);
         }
     }
 
@@ -31,9 +31,9 @@ public class ObjectPooler : MonoBehaviour
     {
         for (int i = 0; i < amountToPool; i++)
         {
-            if (!pooledObjects[i].activeInHierarchy)
+            if (!_pooledObjects[i].activeInHierarchy)
             {
-                return pooledObjects[i];
+                return _pooledObjects[i];
             }
         }
         return null; 

@@ -28,7 +28,7 @@ public class Basic_Enemy_Script : MonoBehaviour
     public void TakeDamage(int damage)
     {
         hp -= damage;
-        if (hp <= 0) Destroy(gameObject);
+        if (hp <= 0) gameObject.SetActive(false);
     }
 
     protected IEnumerator HittingBuiling(GameObject obj)

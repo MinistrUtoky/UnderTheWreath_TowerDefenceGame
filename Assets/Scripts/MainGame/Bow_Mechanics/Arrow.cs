@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Arrow : MonoBehaviour
@@ -16,6 +18,7 @@ public class Arrow : MonoBehaviour
 
     private void Start()
     {
+        Destroy(gameObject, 10f);
         _prevPos = transform.position;
     }
     
@@ -33,6 +36,7 @@ public class Arrow : MonoBehaviour
     {
         _rb.bodyType = RigidbodyType2D.Static;
         _col.enabled = false;
+        Destroy(gameObject, 5f);
     }
 
     private void BaseMoveByAir()
@@ -51,6 +55,8 @@ public class Arrow : MonoBehaviour
         }
         if (col.gameObject.tag == "Enemy")
         {
+            if (_col.enabled == false) return;
+            _col.enabled = false;
             col.gameObject.GetComponent<Basic_Enemy_Script>().TakeDamage(_damage);
             Destroy(gameObject);
         }

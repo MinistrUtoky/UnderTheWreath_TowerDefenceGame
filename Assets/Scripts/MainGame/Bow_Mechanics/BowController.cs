@@ -36,7 +36,7 @@ public class BowController : MonoBehaviour
     {
         if (rotationDirection == Vector2.zero)
         {
-            Debug.LogError("Attempt to set zero default direction");
+            //Debug.LogError("Attempt to set zero default direction");
             return;
         }
         _defaultShootingVector = rotationDirection;
@@ -48,7 +48,7 @@ public class BowController : MonoBehaviour
     {
         if (rotationDirection == Vector2.zero)
         {
-            Debug.LogError("Attempt to rotate to zero direction");
+            //Debug.LogError("Attempt to rotate to zero direction");
             return;
         }
         _shootingVector = rotationDirection;
@@ -69,7 +69,7 @@ public class BowController : MonoBehaviour
     {
         if (!_isCharging)
         {
-            Debug.LogError("Attempt to shoot without charging");
+            //Debug.LogError("Attempt to shoot without charging");
             return null;
         }
         _isCharging = false;
