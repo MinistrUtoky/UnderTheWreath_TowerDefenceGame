@@ -1,15 +1,18 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Rendering;
 using UnityEngine;
 
 public class ArcherController : MonoBehaviour
 {
+    [SerializeField] private AnimationCurve curvePowerByDistance;
+    
     private BowController _bowController;
+
     public bool IsReadyToShoot => _bowController.IsCharging;
     
     private SpriteRenderer _bodySprite;
-
-    public void SetDefaultPosition(Vector2 rotationDirection) => _bowController.SetDefaultRotation(rotationDirection);
     
     private void Awake()
     {
@@ -28,17 +31,17 @@ public class ArcherController : MonoBehaviour
     public void Aim(Vector2 shootingVector)
     {
         _bowController.Rotate(shootingVector);
-        _bowController.Charge();
+        _bowController.Charge(curvePowerByDistance.Evaluate(shootingVector.magnitude));
     }
 
     public void StopAiming()
     {
-        _bowController.RotateToDefaultPosition();
-        _bowController.StopCharging();
+        _bowController.ReturnToDefault();
+        _bowController.CancelCharging();
     }
 
     private void TurnAround()
     {
-        _bodySprite.flipX = _bowController.ShootingVector.x <= 0;
+        _bodySprite.flipX = _bowController.ShootingDirection.x <= 0;
     }
 }

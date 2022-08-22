@@ -1,16 +1,25 @@
 using UnityEngine;
-using UnityEngine.Serialization;
 
-public class LevelManager : MonoBehaviour
+public class LevelManager : Manager<LevelManager>
 {
-    private ArcherController _archer;
+    [SerializeField] private GameObject archerPrefab;
     [SerializeField] private Vector2 defaultRotationDirection;
+    [SerializeField] private Transform archerSpawningPoint;
+    
+    private ArcherController _archer;
 
-    public void SetArcher(ArcherController archer)
+    public ArcherController Archer
     {
-        _archer = archer;
-        archer.SetDefaultPosition(defaultRotationDirection.normalized);
+        get
+        {
+            if (_archer == null)
+            {
+                _archer = Instantiate(archerPrefab, archerSpawningPoint.position, Quaternion.identity).GetComponent<ArcherController>();
+            }
+
+            return _archer;
+        }
     }
-    
-    
+
+    public Vector2 DefaultRotationDirection => defaultRotationDirection;
 }

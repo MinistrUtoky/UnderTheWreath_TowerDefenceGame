@@ -3,10 +3,13 @@ using UnityEngine;
 
 public class Arrow : MonoBehaviour
 {
+    [SerializeField] private float rotationSpeed;
+    
     private Rigidbody2D _rb;
     private Vector3 _prevPos;
     private Collider2D _col;
-    
+    private Vector3 _prevDirection;
+
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
@@ -36,10 +39,13 @@ public class Arrow : MonoBehaviour
 
     private void BaseMoveByAir()
     {
-        if (_rb.velocity == Vector2.zero)
+        if (transform.position == _prevPos)
             return;
-        transform.rotation = Quaternion.LookRotation(Vector3.forward, (transform.position - _prevPos)*Time. deltaTime);
-        _prevPos = transform.position;
+        var position = transform.position;
+        Vector3 direction = Vector3.Lerp(_prevDirection, position - _prevPos, rotationSpeed * Time.fixedDeltaTime);
+        transform.rotation = Quaternion.LookRotation(Vector3.forward, direction);
+        _prevPos = position;
+        _prevDirection = direction;
     }
 
     private void OnTriggerEnter2D(Collider2D col)
