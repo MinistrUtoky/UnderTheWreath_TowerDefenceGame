@@ -17,6 +17,7 @@ public class BowController : MonoBehaviour
     [SerializeField] private List<Sprite> bowSprites;
     
     private SpriteRenderer _bowSprite;
+    private TrajectoryController _trajectory;
 
     private Transform _arrowSpawningPoint;
 
@@ -45,6 +46,7 @@ public class BowController : MonoBehaviour
 
     private void Awake()
     {
+        _trajectory = GetComponentInChildren<TrajectoryController>();
         _bowSprite = transform.Find("BowSprite").GetComponent<SpriteRenderer>();
         _arrowSpawningPoint = transform.Find("ArrowSpawningPoint");
     }
@@ -64,7 +66,6 @@ public class BowController : MonoBehaviour
     private void FlipBowSprite()
     {
         int spriteIndex = (int) bowSpriteByChargeValueCurve.Evaluate(_chargeValue);
-        Debug.Log(_chargeValue);
         _bowSprite.sprite = bowSprites[spriteIndex];
     }
 
@@ -83,6 +84,7 @@ public class BowController : MonoBehaviour
         }
         _shootingDirection = rotationDirection;
         transform.rotation = Quaternion.LookRotation(Vector3.forward, _shootingDirection);
+        Debug.Log(transform.rotation.eulerAngles);
     }
 
     
@@ -90,6 +92,7 @@ public class BowController : MonoBehaviour
     {
         _chargeValue = chargeValueByPowerCurve.Evaluate(power);
         _shootingPower = power;
+        _trajectory.DrawLine(_shootingPower, _shootingDirection);
     }
 
     public List<Arrow> Shoot()
@@ -123,6 +126,7 @@ public class BowController : MonoBehaviour
     public void ReturnToDefault()
     {
         Rotate(DefaultShootingVector);
-        Charge(0);
+        _chargeValue = 0;
+        _trajectory.ClearLine();
     } 
 }
