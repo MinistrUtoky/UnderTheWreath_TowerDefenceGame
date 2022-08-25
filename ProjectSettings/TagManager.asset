@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Arrow
   - Enemy
+  - Builder
+  - Building
   layers:
   - Default
   - TransparentFX
@@ -13,7 +15,7 @@ TagManager:
   - ActionLayer
   - Water
   - UI
-  - EnemiesLayer
+  - Enemies_Layer
   - 
   - 
   - 

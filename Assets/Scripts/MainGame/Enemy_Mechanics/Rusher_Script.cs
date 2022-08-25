@@ -13,32 +13,30 @@ public class Rusher_Script : Basic_Enemy_Script
         _backLeapVector = new Vector3(-_damageBackLeap, _damageBackLeap, 0);
     }
 
-    void OnCollisionEnter2D(Collision2D col)
+    void OnTriggerEnter2D(Collider2D col)
     {
-        GameObject obj = col.gameObject;
-        if (obj.name == "Barracks" || obj.name == "Townhall" || obj.name == "Wall")
+        _obj = col.gameObject;
+        if (_obj.tag == "Building")
         {
             rb.velocity = Vector2.zero;
-            if (obj.name == "Wall")
+            if (_obj.name == "Wall")
             {
                 rb.AddForce(_backLeapVector);
-                DamageDealing(obj);
+                DamageDealing(_obj);
             }
-            else StartCoroutine(HittingBuiling(obj));
+            else StartCoroutine(HittingBuiling(_obj));
         }
-        if (obj.name == "Ground")
-        {
-            rb.velocity = new Vector3(speed, 0, 0);
-        }
+        if (_obj.tag == "Builder") _obj.GetComponent<Builder_Script>().Retreat();
     }
 
-    void OnCollisionExit2D(Collision2D col)
+
+    void OnTriggerExit2D(Collider2D col)
     {
-        GameObject obj = col.gameObject;
-        if (obj.name == "Barracks" || obj.name == "Townhall" || obj.name == "Wall")
+        _obj = col.gameObject;
+        if (_obj.tag == "Building")
         {
-            StopCoroutine(HittingBuiling(obj));
-            if (obj.name != "Wall") rb.velocity = new Vector3(speed, 0, 0);
+            StopCoroutine(HittingBuiling(_obj));
+            if (_obj.name != "Wall") rb.velocity = new Vector3(speed, 0, 0);
         }
     }
 }

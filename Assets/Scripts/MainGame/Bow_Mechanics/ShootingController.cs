@@ -1,8 +1,13 @@
+using System;
 using UnityEngine;
 
 public class ShootingController : MonoBehaviour
 {
+    [SerializeField] private GameObject dotStart;
+    [SerializeField] private GameObject dotEnd;
+    
     private ArcherController _archer;
+    
     private Vector2 _dragStartPoint;
     private Vector2 _dragEndPoint;
     private Camera _mainCamera;
@@ -10,6 +15,11 @@ public class ShootingController : MonoBehaviour
     private void Awake()
     {
         _mainCamera = Camera.main;
+    }
+
+    private void Start()
+    {
+        _archer = LevelManager.Instance.Archer;
     }
 
     private void Update()
@@ -33,28 +43,22 @@ public class ShootingController : MonoBehaviour
         // }
         if (Input.GetMouseButtonDown(0))
         {
-            OnBeginDrag(_mainCamera.ScreenToWorldPoint(Input.mousePosition));
+            OnBeginDrag(Input.mousePosition);
         } 
         else if (Input.GetMouseButton(0))
         {
-            OnDrag(_mainCamera.ScreenToWorldPoint(Input.mousePosition));
+            OnDrag(Input.mousePosition);
         }
         else if (Input.GetMouseButtonUp(0))
         {
-            OnEndDrag(_mainCamera.ScreenToWorldPoint(Input.mousePosition));
+            OnEndDrag(Input.mousePosition);
         }
-    }
-
-    public void SetArcher(ArcherController archer)
-    {
-        _archer = archer;
-        _dragEndPoint = Vector2.zero;
-        _dragStartPoint = Vector2.zero;
     }
 
     private void OnBeginDrag(Vector3 touchPosition)
     {
         _dragStartPoint = _mainCamera.ScreenToWorldPoint(touchPosition);
+        dotStart.transform.position = _dragStartPoint;
         _dragEndPoint = _dragStartPoint;
     }
 
@@ -62,7 +66,9 @@ public class ShootingController : MonoBehaviour
     {
 
         _dragEndPoint = _mainCamera.ScreenToWorldPoint(touchPosition);
-        if (_dragEndPoint == _dragStartPoint)
+        dotEnd.transform.position = _dragEndPoint;
+        // Debug.Log(Vector2.Distance(dotEnd.transform.position, dotStart.transform.position));
+        if (_dragEndPoint == _dragStartPoint)   
         {
             _archer.StopAiming();
         }
@@ -74,7 +80,6 @@ public class ShootingController : MonoBehaviour
 
     private void OnEndDrag(Vector3 touchPosition)
     {
-
         if (_dragEndPoint == _dragStartPoint)
         {
             if (_archer.IsReadyToShoot)
@@ -82,9 +87,12 @@ public class ShootingController : MonoBehaviour
                 _archer.StopAiming();
             }
         }
-        _dragEndPoint = _mainCamera.ScreenToWorldPoint(touchPosition);
-        _archer.Shoot();
-        _dragEndPoint = Vector2.zero;
-        _dragStartPoint = Vector2.zero;
+        else 
+        {
+            _dragEndPoint = _mainCamera.ScreenToWorldPoint(touchPosition);
+            _archer.Shoot();
+            _dragEndPoint = Vector2.zero;
+            _dragStartPoint = Vector2.zero;
+        }
     }
 }

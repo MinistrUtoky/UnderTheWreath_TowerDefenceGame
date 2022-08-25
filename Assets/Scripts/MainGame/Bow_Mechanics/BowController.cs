@@ -1,98 +1,132 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Quaternion = UnityEngine.Quaternion;
+using Random = UnityEngine.Random;
 using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
 
 public class BowController : MonoBehaviour
 {
     [SerializeField] private GameObject arrowPrefab;
+    [SerializeField] private AnimationCurve bowSpriteByChargeValueCurve;
+    [SerializeField] private AnimationCurve shakingMagnitudeByChargeValueCurve;
+    [SerializeField] private AnimationCurve chargeValueByPowerCurve;
+    [SerializeField] private List<Sprite> bowSprites;
     
     private SpriteRenderer _bowSprite;
+    private TrajectoryController _trajectory;
 
     private Transform _arrowSpawningPoint;
-    [SerializeField] private AnimationCurve curvePowerByDistance;
 
-    public Vector2 ShootingVector => _shootingVector;
+    private Vector2 _shootingDirection;
+    private float _shootingPower;
+    /// <summary>
+    /// value between 0 and 1 which is effects on bow sprite and shaking effect
+    /// </summary>
+    private float _chargeValue;
+    private Quaternion _originSpriteRotation;
 
-    private Vector2 _shootingVector;
-    
-    private Vector2 _defaultShootingVector;
+    /// <summary>
+    /// default rotation when bow isn't charging
+    /// </summary>
+    private Vector2 DefaultShootingVector
+    {
+        get
+        {
+            return LevelManager.Instance.DefaultRotationDirection;
+        }
+    }
 
-    private bool _isCharging = false;
+    public bool IsCharging => _chargeValue != 0;
 
-    public bool IsCharging => _isCharging;
-    private Animator anim;
+    public Vector2 ShootingDirection => _shootingDirection;
 
     private void Awake()
     {
-        anim = GetComponent<Animator>();
+        _trajectory = GetComponentInChildren<TrajectoryController>();
         _bowSprite = transform.Find("BowSprite").GetComponent<SpriteRenderer>();
         _arrowSpawningPoint = transform.Find("ArrowSpawningPoint");
     }
 
-    public void SetDefaultRotation(Vector2 rotationDirection)
+    private void Start()
     {
-        if (rotationDirection == Vector2.zero)
-        {
-            //Debug.LogError("Attempt to set zero default direction");
-            return;
-        }
-        _defaultShootingVector = rotationDirection;
-        _isCharging = false;
-        _shootingVector = _defaultShootingVector;
+        ReturnToDefault();
+        _originSpriteRotation = _bowSprite.transform.localRotation;
+    }
+
+    private void Update()
+    {
+        Shake();
+        FlipBowSprite();
+    }
+
+    private void FlipBowSprite()
+    {
+        int spriteIndex = (int) bowSpriteByChargeValueCurve.Evaluate(_chargeValue);
+        _bowSprite.sprite = bowSprites[spriteIndex];
+    }
+
+    private void Shake()
+    {
+        float zRotation = Random.Range(-1, 1) * shakingMagnitudeByChargeValueCurve.Evaluate(_chargeValue);
+        _bowSprite.transform.localRotation = Quaternion.Euler(_originSpriteRotation.eulerAngles + new Vector3(0, 0, zRotation));
     }
 
     public void Rotate(Vector2 rotationDirection)
     {
         if (rotationDirection == Vector2.zero)
         {
-            //Debug.LogError("Attempt to rotate to zero direction");
+            Debug.LogError("Attempt to rotate to zero direction");
             return;
         }
-        _shootingVector = rotationDirection;
-        transform.rotation = Quaternion.LookRotation(Vector3.forward, _shootingVector);
-        // transform.rotation.SetLookRotation(transform.position + (Vector3)_rotationDirection);
+        _shootingDirection = rotationDirection;
+        transform.rotation = Quaternion.LookRotation(Vector3.forward, _shootingDirection);
+        Debug.Log(transform.rotation.eulerAngles);
     }
 
-    public void Charge()
+    
+    public void Charge(float power)
     {
-        if (IsCharging)
-            return;
-        _isCharging = true;
-        
-        //TODO charging animation
+        _chargeValue = chargeValueByPowerCurve.Evaluate(power);
+        _shootingPower = power;
+        _trajectory.DrawLine(_shootingPower, _shootingDirection);
     }
 
     public List<Arrow> Shoot()
     {
-        if (!_isCharging)
+        if (!IsCharging)
         {
-            //Debug.LogError("Attempt to shoot without charging");
+            Debug.LogError("Attempt to shoot without charging");
             return null;
         }
-        _isCharging = false;
-
-
         var arrow = Instantiate(arrowPrefab, _arrowSpawningPoint.position,
-            Quaternion.LookRotation(Vector3.forward, _shootingVector)).GetComponent<Arrow>();
+            Quaternion.LookRotation(Vector3.forward, _shootingDirection)).GetComponent<Arrow>();
         var arrows = new List<Arrow> { arrow };
-        Debug.Log(_shootingVector.magnitude);
-        arrow.Throw(_shootingVector.normalized * curvePowerByDistance.Evaluate(_shootingVector.magnitude));
-        
-        RotateToDefaultPosition();
+        arrow.Throw(_shootingDirection.normalized * _shootingPower);
+        ReturnToDefault();
         return arrows;
     }
-
-    public void StopCharging()
+    
+    /// <summary>
+    /// If reconsider to shoot 
+    /// </summary>
+    public void CancelCharging()
     {
-        if (!_isCharging)
+        if (_chargeValue == 0)
+        {
             return;
-        _isCharging = false;
-
+        }
+        ReturnToDefault();
         //TODO stop animation
     }
 
-    public void RotateToDefaultPosition() => Rotate(_defaultShootingVector);
+    public void ReturnToDefault()
+    {
+        Rotate(DefaultShootingVector);
+        _chargeValue = 0;
+        _trajectory.ClearLine();
+    } 
 }

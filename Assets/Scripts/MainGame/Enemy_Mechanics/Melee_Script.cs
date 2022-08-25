@@ -4,26 +4,23 @@ using UnityEngine;
 
 public class Melee_Script : Basic_Enemy_Script
 {
-    void OnCollisionEnter2D(Collision2D col)
+    void OnTriggerEnter2D(Collider2D col)
     {
-        GameObject obj = col.gameObject;
-        if (obj.name == "Barracks" || obj.name == "Townhall" || obj.name == "Wall")
+        _obj = col.gameObject;
+        if (_obj.tag == "Building")
         {
             rb.velocity = Vector2.zero;
-            StartCoroutine(HittingBuiling(obj));
+            StartCoroutine(HittingBuiling(_obj));
         }
-        if (obj.name == "Ground")
-        {
-            rb.velocity = new Vector3(speed, 0, 0);
-        }
+        if (_obj.tag == "Builder") _obj.GetComponent<Builder_Script>().Retreat();
     }
 
-    void OnCollisionExit2D(Collision2D col)
+    void OnTriggerExit2D(Collider2D col)
     {
-        GameObject obj = col.gameObject;
-        if (obj.name == "Barracks" || obj.name == "Townhall" || obj.name == "Wall")
+        _obj = col.gameObject;
+        if (_obj.tag == "Building")
         {
-            StopCoroutine(HittingBuiling(obj));
+            StopCoroutine(HittingBuiling(_obj));
             rb.velocity = new Vector3(speed, 0, 0);
         }
     }

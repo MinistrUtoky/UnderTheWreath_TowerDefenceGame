@@ -5,10 +5,11 @@ using UnityEngine;
 
 public class Arrow : MonoBehaviour
 {
-    [SerializeField] private int _damage = 5;
+    [SerializeField] protected int _damage = 5;
     private Rigidbody2D _rb;
     private Vector3 _prevPos;
-    private Collider2D _col;
+    protected Collider2D _col;
+    protected GameObject _obj;
     
     private void Awake()
     {
@@ -32,7 +33,7 @@ public class Arrow : MonoBehaviour
         _rb.AddForce(forceVector, ForceMode2D.Impulse);
     }
 
-    private void Land()
+    protected void Land()
     {
         _rb.bodyType = RigidbodyType2D.Static;
         _col.enabled = false;
@@ -47,17 +48,18 @@ public class Arrow : MonoBehaviour
         _prevPos = transform.position;
     }
 
-    private void OnTriggerEnter2D(Collider2D col)
+    void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.name == "Ground")
+        _obj = col.gameObject; 
+        if (_obj.name == "Ground")
         {
             Land();
         }
-        if (col.gameObject.tag == "Enemy")
+        if (_obj.tag == "Enemy")
         {
             if (_col.enabled == false) return;
             _col.enabled = false;
-            col.gameObject.GetComponent<Basic_Enemy_Script>().TakeDamage(_damage);
+            _obj.GetComponent<Basic_Enemy_Script>().TakeDamage(_damage);
             Destroy(gameObject);
         }
     }

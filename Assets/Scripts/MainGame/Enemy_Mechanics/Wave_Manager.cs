@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WaveManager : MonoBehaviour
+public class Wave_Manager : MonoBehaviour
 {
     [System.Serializable]
     private class Wave
@@ -14,6 +14,7 @@ public class WaveManager : MonoBehaviour
             public int amountToPool;
         }
         public List<Enemy> enemyPoolers = new List<Enemy>();
+        [HideInInspector] public bool isOver=false;
         [HideInInspector] public List<ObjectPooler> poolsOfEnemies = new List<ObjectPooler>();
     }
     private ObjectPooler _poolOfEnemies;
