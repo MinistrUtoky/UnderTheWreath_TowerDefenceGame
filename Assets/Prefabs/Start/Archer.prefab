@@ -86,7 +86,7 @@ LineRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_Positions:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 1}
@@ -312,7 +312,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 731be12ad5d1f7c428082dfdc91833b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  arrowPrefab: {fileID: 2557782593436258309, guid: 03ad5c3cb4654f747ae9fb533130f222, type: 3}
+  arrowPrefab: {fileID: 6902567163455742072, guid: 6fc78968688798e4ab992ff8b120b175, type: 3}
   bowSpriteByChargeValueCurve:
     serializedVersion: 2
     m_Curve:

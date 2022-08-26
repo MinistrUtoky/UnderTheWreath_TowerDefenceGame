@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BasicEnemy : MonoBehaviour
+public class Basic_Enemy_Script : MonoBehaviour
 {
     [SerializeField] protected float speed = 3.0f;
     [SerializeField] protected int hp = 10;
     [SerializeField] protected int damage = 5;
     protected Rigidbody2D rb;
     protected GameObject _obj;
+    public Wave_Manager waveControllerScript;
 
     void Start()
     {
@@ -30,7 +31,11 @@ public class BasicEnemy : MonoBehaviour
     public void TakeDamage(int damage)
     {
         hp -= damage;
-        if (hp <= 0) gameObject.SetActive(false);
+        if (hp <= 0)
+        {
+            waveControllerScript.EnemyDied();
+            gameObject.SetActive(false);
+        }
     }
 
     protected IEnumerator HittingBuiling(GameObject obj)
@@ -44,9 +49,9 @@ public class BasicEnemy : MonoBehaviour
 
     protected void DamageDealing(GameObject obj)
     {
-        if (obj.name == "Barracks") obj.GetComponent<Barracks>().TakeDamage(damage);
-        else if (obj.name == "Townhall") obj.GetComponent<Townhall>().TakeDamage(damage);
-        else if (obj.name == "Wall") obj.GetComponent<Wall>().TakeDamage(damage);
+        if (obj.name == "Barracks") obj.GetComponent<Barracks_Script>().TakeDamage(damage);
+        else if (obj.name == "Townhall") obj.GetComponent<Townhall_Script>().TakeDamage(damage);
+        else if (obj.name == "Wall") obj.GetComponent<Wall_Script>().TakeDamage(damage);
     }
 
     

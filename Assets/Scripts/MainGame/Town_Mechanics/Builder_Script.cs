@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Builder : MonoBehaviour
+public class Builder_Script : MonoBehaviour
 {
     [SerializeField] private float _speed = 2f;
     [SerializeField] private int _healPower = 3;
@@ -22,7 +22,7 @@ public class Builder : MonoBehaviour
 
     private void BuilderMovement()
     {
-        if (transform.position.x > 8.7) Destroy(gameObject);
+        if (transform.position.x > 8.7) gameObject.SetActive(false);
         _rb.velocity = _currentVelocity;
     }
 
@@ -34,6 +34,16 @@ public class Builder : MonoBehaviour
     public void Stop()
     { 
         _currentVelocity = Vector2.zero;
+    }
+
+    public bool IsMoving()
+    {
+        return _currentVelocity != Vector3.zero;
+    }
+    
+    public void Go()
+    {
+        _currentVelocity = new Vector3(-_speed, 0, 0);
     }
 
     public int GetHealing()

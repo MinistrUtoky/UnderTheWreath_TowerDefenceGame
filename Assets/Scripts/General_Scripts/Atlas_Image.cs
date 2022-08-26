@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.U2D;
 using UnityEngine.UI;
 
-public class AtlasImage: MonoBehaviour
+public class Atlas_Image: MonoBehaviour
 {
     [SerializeField] SpriteAtlas atlas;
     [SerializeField] string original_image;

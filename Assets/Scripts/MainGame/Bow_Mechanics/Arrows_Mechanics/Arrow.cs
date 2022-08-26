@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Arrow : MonoBehaviour
 {
-    [SerializeField] protected int damage = 5;
+    [SerializeField] protected int _damage = 5;
     private Rigidbody2D _rb;
     private Vector3 _prevPos;
     protected Collider2D _col;
@@ -59,7 +59,7 @@ public class Arrow : MonoBehaviour
         {
             if (_col.enabled == false) return;
             _col.enabled = false;
-            _obj.GetComponent<BasicEnemy>().TakeDamage(damage);
+            _obj.GetComponent<Basic_Enemy_Script>().TakeDamage(_damage);
             Destroy(gameObject);
         }
     }

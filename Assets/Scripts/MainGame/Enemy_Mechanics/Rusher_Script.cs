@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Rusher : BasicEnemy
+public class Rusher_Script : Basic_Enemy_Script
 {
     [SerializeField] private float _damageBackLeap = 1000f;
     private Vector3 _backLeapVector;
@@ -24,9 +24,9 @@ public class Rusher : BasicEnemy
                 rb.AddForce(_backLeapVector);
                 DamageDealing(_obj);
             }
-            else StartCoroutine(HittingBuiling(_obj));
+            else if (_obj.activeSelf) StartCoroutine(HittingBuiling(_obj));
         }
-        if (_obj.tag == "Builder") _obj.GetComponent<Builder>().Retreat();
+        if (_obj.tag == "Builder") _obj.GetComponent<Builder_Script>().Retreat();
     }
 
 
