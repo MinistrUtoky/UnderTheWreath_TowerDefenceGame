@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Melee_Script : Basic_Enemy_Script
+public class Melee : BasicEnemy
 {
     void OnTriggerEnter2D(Collider2D col)
     {
@@ -12,7 +12,7 @@ public class Melee_Script : Basic_Enemy_Script
             rb.velocity = Vector2.zero;
             StartCoroutine(HittingBuiling(_obj));
         }
-        if (_obj.tag == "Builder") _obj.GetComponent<Builder_Script>().Retreat();
+        if (_obj.tag == "Builder") _obj.GetComponent<Builder>().Retreat();
     }
 
     void OnTriggerExit2D(Collider2D col)

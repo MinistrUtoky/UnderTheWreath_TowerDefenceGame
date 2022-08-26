@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Upgrade_Arrow : Arrow
+public class UpgradeArrow : Arrow
 {
     private GameObject _buildingToUpgrade;
 
@@ -14,14 +14,14 @@ public class Upgrade_Arrow : Arrow
             Land();
             if (_buildingToUpgrade != null)
             {
-                _buildingToUpgrade.GetComponent<Building_Script>().LevelUp();
+                _buildingToUpgrade.GetComponent<Building>().LevelUp();
             }
         }
         if (_obj.tag == "Enemy")
         {
             if (_col.enabled == false) return;
             _col.enabled = false;
-            _obj.GetComponent<Basic_Enemy_Script>().TakeDamage(_damage);
+            _obj.GetComponent<BasicEnemy>().TakeDamage(damage);
             Destroy(gameObject);
         }
         if (_obj.tag == "Building")

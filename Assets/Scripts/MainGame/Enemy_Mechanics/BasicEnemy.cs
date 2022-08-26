@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Basic_Enemy_Script : MonoBehaviour
+public class BasicEnemy : MonoBehaviour
 {
     [SerializeField] protected float speed = 3.0f;
     [SerializeField] protected int hp = 10;
@@ -44,9 +44,9 @@ public class Basic_Enemy_Script : MonoBehaviour
 
     protected void DamageDealing(GameObject obj)
     {
-        if (obj.name == "Barracks") obj.GetComponent<Barracks_Script>().TakeDamage(damage);
-        else if (obj.name == "Townhall") obj.GetComponent<Townhall_Script>().TakeDamage(damage);
-        else if (obj.name == "Wall") obj.GetComponent<Wall_Script>().TakeDamage(damage);
+        if (obj.name == "Barracks") obj.GetComponent<Barracks>().TakeDamage(damage);
+        else if (obj.name == "Townhall") obj.GetComponent<Townhall>().TakeDamage(damage);
+        else if (obj.name == "Wall") obj.GetComponent<Wall>().TakeDamage(damage);
     }
 
     

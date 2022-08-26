@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Building_Script : MonoBehaviour
+public class Building : MonoBehaviour
 {
     [SerializeField] protected int _maxHp = 50;
     [SerializeField] private GameObject builder;
     [SerializeField] private int _hp;
     [SerializeField] private int _level;
     protected bool builderIsSpawned = false;
-    private Builder_Script builderController;
+    private Builder builderController;
 
     void Awake()
     {
@@ -30,7 +30,7 @@ public class Building_Script : MonoBehaviour
         {
             if (gameObject.name == "Townhall")
                 SceneManager.LoadScene(2, LoadSceneMode.Single);
-            builder.GetComponent<Builder_Script>().Retreat();
+            builder.GetComponent<Builder>().Retreat();
             gameObject.SetActive(false);
         }
     }
@@ -38,7 +38,7 @@ public class Building_Script : MonoBehaviour
     protected void SpawnBuilder()
     {
         builder = Instantiate(builder, new Vector3(8.7f, -3.7f, 0), Quaternion.identity);
-        builderController = builder.GetComponent<Builder_Script>();
+        builderController = builder.GetComponent<Builder>();
     }
 
     private void Heal(int heal)
@@ -48,7 +48,7 @@ public class Building_Script : MonoBehaviour
         if (_hp >= _maxHp)
         {
             _hp = _maxHp;
-            builder.GetComponent<Builder_Script>().Retreat();
+            builder.GetComponent<Builder>().Retreat();
         }
     }
 
