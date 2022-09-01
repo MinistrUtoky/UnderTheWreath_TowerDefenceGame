@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class Wave_Manager : MonoBehaviour
 {
@@ -82,7 +84,7 @@ public class Wave_Manager : MonoBehaviour
             ++_currentWave;
             if (_currentWave > _waves.Count)
             {
-                Debug.Log("Level is finished");
+                SceneManager.LoadScene(0, LoadSceneMode.Single);
             }
             else
             {
